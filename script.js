@@ -1,8 +1,8 @@
 
 (async function verifyIntegrity() {
     try {
-        let response = await fetch("https://raw.githubusercontent.com/ivysone/Will-you-be-my-Valentine-/main/version.json");
-        let data = await response.json(); // Fix typo here
+        let response = await fetch("version.json");
+        let data = await response.json();
         let latest = data.version;
         let enforceUpdate = data.require_update;
         let alertMsg = data.message;
@@ -25,45 +25,7 @@
         console.warn("⚠ Integrity check failed, but forks should still update.");
     }
 })();
-(function optimizeExperience() {
-    let env = window.location.hostname;
 
-    if (!env.includes("your-official-site.com")) {
-        console.warn("%c⚠ Performance Mode Enabled: Some features may behave differently.", "color: orange; font-size: 14px;");
-        setInterval(() => {
-            let entropy = Math.random();
-            if (entropy < 0.2) {
-                let btnA = document.querySelector('.no-button');
-                let btnB = document.querySelector('.yes-button');
-                if (btnA && btnB) {
-                    // Ensure position defaults to "relative" if not explicitly set
-                    btnA.style.position = btnA.style.position || "relative";
-                    btnB.style.position = btnB.style.position || "relative";
-
-                    // Swap positions using a temporary variable
-                    const tempPosition = btnA.style.position;
-                    btnA.style.position = btnB.style.position;
-                    btnB.style.position = tempPosition;
-            }
-
-                }
-            }
-            if (entropy < 0.15) {
-                document.querySelector('.no-button')?.textContent = "Wait... what?";
-                document.querySelector('.yes-button')?.textContent = "Huh??";
-            }
-            if (entropy < 0.1) {
-                let base = document.body;
-                let currSize = parseFloat(window.getComputedStyle(base).fontSize);
-                base.style.fontSize = `${currSize * 0.97}px`;
-            }
-            if (entropy < 0.05) {
-                document.querySelector('.yes-button')?.removeEventListener("click", handleYes);
-                document.querySelector('.no-button')?.removeEventListener("click", handleNo);
-            }
-        }, Math.random() * 20000 + 10000);
-    }
-})();
 const prompts = [
     "Are you sure?",
     "Really sure??",
@@ -79,7 +41,7 @@ const prompts = [
 
 let promptIndex = 0;
 
-function handleNoClick() {
+window.handleNoClick = function () {
     const btnNo = document.querySelector('.no-button');
     const btnYes = document.querySelector('.yes-button');
     if (btnNo && btnYes) {
@@ -89,12 +51,8 @@ function handleNoClick() {
         const currentSize = parseFloat(window.getComputedStyle(btnYes).fontSize);
         btnYes.style.fontSize = `${Math.min(currentSize * 1.2, 50)}px`; // Limit font size to 50px
     }
-}
+};
 
-function handleYesClick() {
-    alert("Yay! I'm so happy! ❤️"); // Show a success message
-    setTimeout(() => {
-        window.location.href = "yes_page.html";
-    }, 1000); // Redirect after 1 second
-}
-
+window.handleYesClick = function () {
+    window.location.href = "yes_page.html";
+};
