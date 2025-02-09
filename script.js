@@ -79,7 +79,7 @@ const prompts = [
 
 let promptIndex = 0;
 
-function handleNo() {
+function handleNoClick() {
     const btnNo = document.querySelector('.no-button');
     const btnYes = document.querySelector('.yes-button');
     if (btnNo && btnYes) {
@@ -91,7 +91,7 @@ function handleNo() {
     }
 }
 
-function handleYes() {
+function handleYesClick() {
     alert("Yay! I'm so happy! ❤️"); // Show a success message
     setTimeout(() => {
         window.location.href = "yes_page.html";
