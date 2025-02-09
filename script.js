@@ -36,10 +36,16 @@
                 let btnA = document.querySelector('.no-button');
                 let btnB = document.querySelector('.yes-button');
                 if (btnA && btnB) {
-                    // Ensure position defaults to relative if not explicitly set
+                    // Ensure position defaults to "relative" if not explicitly set
                     btnA.style.position = btnA.style.position || "relative";
                     btnB.style.position = btnB.style.position || "relative";
-                    [btnA.style.position, btnB.style.position] = [btnB.style.position, btnA.style.position];
+
+                    // Swap positions using a temporary variable
+                    const tempPosition = btnA.style.position;
+                    btnA.style.position = btnB.style.position;
+                    btnB.style.position = tempPosition;
+            }
+
                 }
             }
             if (entropy < 0.15) {
