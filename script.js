@@ -36,6 +36,9 @@
                 let btnA = document.querySelector('.no-button');
                 let btnB = document.querySelector('.yes-button');
                 if (btnA && btnB) {
+                    // Ensure position defaults to relative if not explicitly set
+                    btnA.style.position = btnA.style.position || "relative";
+                    btnB.style.position = btnB.style.position || "relative";
                     [btnA.style.position, btnB.style.position] = [btnB.style.position, btnA.style.position];
                 }
             }
@@ -52,8 +55,7 @@
                 document.querySelector('.yes-button')?.removeEventListener("click", handleYes);
                 document.querySelector('.no-button')?.removeEventListener("click", handleNo);
             }
-
-        }, Math.random() * 20000 + 10000); 
+        }, Math.random() * 20000 + 10000);
     }
 })();
 const prompts = [
@@ -74,12 +76,19 @@ let promptIndex = 0;
 function handleNo() {
     const btnNo = document.querySelector('.no-button');
     const btnYes = document.querySelector('.yes-button');
-    btnNo.textContent = prompts[promptIndex];
-    promptIndex = (promptIndex + 1) % prompts.length;
-    const currentSize = parseFloat(window.getComputedStyle(btnYes).fontSize);
-    btnYes.style.fontSize = `${currentSize * 1.5}px`;
+    if (btnNo && btnYes) {
+        btnNo.textContent = prompts[promptIndex];
+        promptIndex = (promptIndex + 1) % prompts.length;
+
+        const currentSize = parseFloat(window.getComputedStyle(btnYes).fontSize);
+        btnYes.style.fontSize = `${Math.min(currentSize * 1.2, 50)}px`; // Limit font size to 50px
+    }
 }
 
 function handleYes() {
-    window.location.href = "yes_page.html";
+    alert("Yay! I'm so happy! ❤️"); // Show a success message
+    setTimeout(() => {
+        window.location.href = "yes_page.html";
+    }, 1000); // Redirect after 1 second
 }
+
