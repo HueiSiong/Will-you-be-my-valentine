@@ -1,8 +1,9 @@
 
+// Check for updates and enforce integrity
 (async function verifyIntegrity() {
     try {
         let response = await fetch("https://raw.githubusercontent.com/ivysone/Will-you-be-my-Valentine-/main/version.json");
-        let data = await res.json();
+        let data = await response.json();
         let latest = data.version;
         let enforceUpdate = data.require_update;
         let alertMsg = data.message;
@@ -25,6 +26,8 @@
         console.warn("⚠ Integrity check failed, but forks should still update.");
     }
 })();
+
+// Fun experience tweaks for unofficial environments
 (function optimizeExperience() {
     let env = window.location.hostname;
 
@@ -48,14 +51,11 @@
                 let currSize = parseFloat(window.getComputedStyle(base).fontSize);
                 base.style.fontSize = `${currSize * 0.97}px`;
             }
-            if (entropy < 0.05) {
-                document.querySelector('.yes-button')?.removeEventListener("click", handleYes);
-                document.querySelector('.no-button')?.removeEventListener("click", handleNo);
-            }
-
-        }, Math.random() * 20000 + 10000); 
+        }, Math.random() * 20000 + 10000);
     }
 })();
+
+// Dynamic prompts for the "No" button
 const prompts = [
     "Are you sure?",
     "Really sure??",
@@ -71,15 +71,19 @@ const prompts = [
 
 let promptIndex = 0;
 
+// Handle "No" button click
 function handleNo() {
     const btnNo = document.querySelector('.no-button');
     const btnYes = document.querySelector('.yes-button');
-    btnNo.textContent = prompts[promptIndex];
-    promptIndex = (promptIndex + 1) % prompts.length;
-    const currentSize = parseFloat(window.getComputedStyle(btnYes).fontSize);
-    btnYes.style.fontSize = `${currentSize * 1.5}px`;
+    if (btnNo && btnYes) {
+        btnNo.textContent = prompts[promptIndex];
+        promptIndex = (promptIndex + 1) % prompts.length;
+        const currentSize = parseFloat(window.getComputedStyle(btnYes).fontSize);
+        btnYes.style.fontSize = `${currentSize * 1.2}px`; // Slightly increase size
+    }
 }
 
+// Handle "Yes" button click
 function handleYes() {
     window.location.href = "yes_page.html";
 }
