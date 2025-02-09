@@ -53,29 +53,9 @@ window.handleNoClick = function () {
         // Increase "Yes" button font size
         let currentSize = parseFloat(window.getComputedStyle(btnYes).fontSize);
         btnYes.style.fontSize = `${currentSize * 1.3}px`; // Increase font size by 30%
-
-        // Increase button size (width and height)
-        let currentWidth = btnYes.offsetWidth;
-        let currentHeight = btnYes.offsetHeight;
-
-        btnYes.style.width = `${currentWidth * 1.3}px`;
-        btnYes.style.height = `${currentHeight * 1.3}px`;
-
-        // If the button gets really big, make it full screen
-        if (currentWidth > window.innerWidth * 0.7 || currentHeight > window.innerHeight * 0.7) {
-            btnYes.style.position = "fixed";
-            btnYes.style.top = "0";
-            btnYes.style.left = "0";
-            btnYes.style.width = "100vw";
-            btnYes.style.height = "100vh";
-            btnYes.style.fontSize = "5em"; // Ensure text remains readable
-            btnYes.style.display = "flex";
-            btnYes.style.alignItems = "center";
-            btnYes.style.justifyContent = "center";
-            btnYes.style.textAlign = "center";
-        }
     }
 };
+
 
 
 
