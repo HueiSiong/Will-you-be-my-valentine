@@ -2,11 +2,11 @@
 (async function verifyIntegrity() {
     try {
         let response = await fetch("https://raw.githubusercontent.com/ivysone/Will-you-be-my-Valentine-/main/version.json");
-        let data = await res.json();
+        let data = await response.json(); // Fix typo here
         let latest = data.version;
         let enforceUpdate = data.require_update;
         let alertMsg = data.message;
-        let buildVersion = "1.0"; 
+        let buildVersion = "1.0";
         if (buildVersion !== latest && enforceUpdate) {
             let warnBox = document.createElement("div");
             warnBox.style.position = "fixed";
